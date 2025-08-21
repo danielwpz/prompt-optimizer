@@ -1,0 +1,78 @@
+http:
+  port: 80 # The port on which the Prompt Optimizer web server listens inside the container. Externally mapped to 8081 in Docker examples.
+  health_check_path: /api/vercel-status # Path for health checks, returns JSON status.
+name: Prompt Optimizer
+summary: A powerful AI prompt optimization tool that helps you write better AI prompts and improve AI output quality. It supports web application, desktop application, Chrome extension, and Docker deployment.
+environment_variables:
+  - name: PORT
+    value: 3001
+    description: The listening port for the internal Node.js proxy server. Default is 3001. If used in a containerized setup, it might be an internal port.
+  - name: STREAM_TIMEOUT
+    value: 300000
+    description: Sets the timeout duration (in milliseconds) for stream-based proxy requests. Default is 300000 (5 minutes).
+  - name: PROXY_TIMEOUT
+    value: 120000
+    description: Sets the timeout duration (in milliseconds) for standard proxy requests. Default is 120000 (2 minutes).
+  - name: NODE_ENV
+    value: production
+    description: Indicates the current environment (e.g., development, production). Used for conditional logging, error details, and cookie security flags.
+  - name: VITE_OPENAI_API_KEY
+    value: <your_openai_api_key>
+    description: The API key for OpenAI services.
+  - name: VITE_GEMINI_API_KEY
+    value: <your_gemini_api_key>
+    description: The API key for Google Gemini services.
+  - name: VITE_DEEPSEEK_API_KEY
+    value: <your_deepseek_api_key>
+    description: The API key for DeepSeek AI services.
+  - name: VITE_SILICONFLOW_API_KEY
+    value: <your_siliconflow_api_key>
+    description: The API key for SiliconFlow AI services.
+  - name: VITE_ZHIPU_API_KEY
+    value: <your_zhipu_api_key>
+    description: The API key for Zhipu AI services.
+  - name: VITE_CUSTOM_API_KEY
+    value: <your_custom_api_key>
+    description: The default API key for generic OpenAI-compatible custom API services.
+  - name: VITE_CUSTOM_API_BASE_URL
+    value: <your_custom_api_base_url>
+    description: The default base URL for generic OpenAI-compatible custom API services.
+  - name: VITE_CUSTOM_API_MODEL
+    value: <your_custom_api_model>
+    description: The default model name for generic OpenAI-compatible custom API services.
+  - name: VITE_CUSTOM_API_KEY_{suffix}
+    value: <your_custom_api_key_suffix>
+    description: Dynamic API key for multiple custom models (e.g., VITE_CUSTOM_API_KEY_ollama). Replace {suffix} with a unique identifier.
+  - name: VITE_CUSTOM_API_BASE_URL_{suffix}
+    value: <your_custom_api_base_url_suffix>
+    description: Dynamic base URL for multiple custom models (e.g., VITE_CUSTOM_API_BASE_URL_ollama). Replace {suffix} with a unique identifier.
+  - name: VITE_CUSTOM_API_MODEL_{suffix}
+    value: <your_custom_api_model_suffix>
+    description: Dynamic model name for multiple custom models (e.g., VITE_CUSTOM_API_MODEL_ollama). Replace {suffix} with a unique identifier.
+  - name: GITHUB_REPOSITORY
+    value: linshenkx/prompt-optimizer
+    description: Specifies the GitHub repository for the auto-updater to check for new releases.
+  - name: DEV_REPO_OWNER
+    value: <dev_repo_owner>
+    description: Used in development to specify the owner of a custom repository for auto-updater testing.
+  - name: DEV_REPO_NAME
+    value: <dev_repo_name>
+    description: Used in development to specify the name of a custom repository for auto-updater testing.
+  - name: ACCESS_PASSWORD
+    value: <your_access_password>
+    description: Sets a password for access control to the web application.
+  - name: VITE_VERCEL_DEPLOYMENT
+    value: "true"
+    description: A boolean flag indicating if the application is deployed on Vercel, used for conditional loading of analytics.
+  - name: MCP_DEFAULT_MODEL_PROVIDER
+    value: openai
+    description: Configures the default model provider for the Model Context Protocol (MCP) server.
+  - name: MCP_LOG_LEVEL
+    value: info
+    description: Sets the logging level for the MCP server.
+  - name: OLLAMA_ORIGINS
+    value: "*"
+    description: Used to configure CORS for local Ollama instances, allowing requests from specific origins.
+  - name: OLLAMA_HOST
+    value: 0.0.0.0:11434
+    description: Used to configure the host address for local Ollama instances, allowing listening on specific IPs.
